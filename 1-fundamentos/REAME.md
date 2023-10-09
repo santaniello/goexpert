@@ -33,7 +33,7 @@
 
 ## Instalando o Go
 
-![Instalação do GO](https://go.dev/)
+[Instalação do GO](https://go.dev/)
 
 
 ### Quais são as principais variáveis de ambiente do GO
