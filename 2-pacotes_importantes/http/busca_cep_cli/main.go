@@ -10,9 +10,9 @@ import (
 
 func main() {
 	for _, cep := range os.Args[1:] {
-		req := callCepApi(cep)
-		defer req.Body.Close()
-		data := readResponseBody(req)
+		resp := callCepApi(cep)
+		defer resp.Body.Close()
+		data := readResponseBody(resp)
 		file := createFile()
 		defer file.Close()
 		saveCepInFile(file, data)
@@ -69,7 +69,7 @@ func readResponseBody(req *http.Response) *ViaCEP {
 }
 
 func callCepApi(cep string) *http.Response {
-	req, err := http.Get("http://viacep.com.br/ws/" + cep + "/json/")
+	resp, err := http.Get("http://viacep.com.br/ws/" + cep + "/json/")
 	if err != nil {
 		/*
 		  A função fmt.Fprintf na linguagem de programação Go é usada para formatar e escrever dados em um io.Writer. Em termos simples, ela permite que você crie uma string formatada, semelhante à função fmt.Sprintf, mas em vez de retornar a string, ela escreve diretamente no io.Writer fornecido.
@@ -77,5 +77,5 @@ func callCepApi(cep string) *http.Response {
 		*/
 		fmt.Fprintf(os.Stderr, "Erro ao fazer requisição: %v\n", err)
 	}
-	return req
+	return resp
 }
