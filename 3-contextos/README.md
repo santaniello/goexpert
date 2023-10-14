@@ -87,4 +87,19 @@ Em Go (Golang), o símbolo <- é utilizado principalmente no contexto de operaç
 
 O símbolo <- é usado tanto para enviar quanto para receber valores de um canal. 
 
+## Observações
+
+Quando usamos contextos, uma convenção da comunidade é que o contexto seja sempre o primeiro parâmetro de uma função.
+
+Exemplo:
+
+```go
+// por convenção, a variavel de contexto sempre é a primeira na assinatura de uma função
+func bookHotel(ctx context.Context, name string) {
+	// Aqui resgatamos o valor setado
+	token := ctx.Value("token")
+	fmt.Println(token)
+}
+```
+
 
