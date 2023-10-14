@@ -85,7 +85,7 @@ func main() {
 
 Repare que como segundo parâmetro da função http.ListenAndServe estamos passando nil, sendo assim, o go irá usaro mux default.
 
-#### Usando um Mux Personalizado:
+#### Usando um Mux Personalizado
 
 Quando você passa uma instância de http.NewServeMux() para http.ListenAndServe, você está indicando que o servidor deve usar esse multiplexer personalizado que você criou, em vez do DefaultServeMux. Isso fornece a você mais controle sobre a configuração e o comportamento do seu servidor.
 
