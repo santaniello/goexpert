@@ -71,6 +71,10 @@ No contexto de servidores web, um multiplexer de solicitações é uma ferrament
 
 Por exemplo, você pode querer que uma solicitação para "/home" retorne uma página inicial, enquanto uma solicitação para "/about" retorne uma página "Sobre nós". O multiplexer ajuda a dirigir cada uma dessas solicitações para a função correta que pode gerar a resposta adequada.
 
+#### Usando DefaultServeMux
+
+Quando você passa nil como o segundo argumento para http.ListenAndServe, o Go usa o DefaultServeMux como o multiplexer de solicitações. Em outras palavras, você está dizendo para o servidor usar o multiplexer padrão fornecido pelo pacote net/http.
+
 Abaixo, segue um exemplo de um código que usa o mux default do Go:
 
 ```go
@@ -81,6 +85,9 @@ func main() {
 
 Repare que como segundo parâmetro da função http.ListenAndServe estamos passando nil, sendo assim, o go irá usaro mux default.
 
+#### Usando um Mux Personalizado:
+
+Quando você passa uma instância de http.NewServeMux() para http.ListenAndServe, você está indicando que o servidor deve usar esse multiplexer personalizado que você criou, em vez do DefaultServeMux. Isso fornece a você mais controle sobre a configuração e o comportamento do seu servidor.
 
 Em Go, o pacote net/http fornece uma implementação básica de um multiplexer chamado ServeMux. Aqui está um exemplo de como você pode usar ServeMux para definir diferentes manipuladores para diferentes caminhos:
 
