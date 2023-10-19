@@ -23,7 +23,7 @@ Se a marca foi alterada, significa que algum outro processo alterou o registro d
 
 ### Exemplo de Lock Otimista
 
-Imagine que abaixo temos uam tabela de banco de dados:
+Imagine que abaixo temos uma tabela de banco de dados:
 
 
 name      | email | versao
