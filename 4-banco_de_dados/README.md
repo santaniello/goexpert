@@ -21,6 +21,18 @@ Se a marca foi alterada, significa que algum outro processo alterou o registro d
 - Mesclar suas mudanças com as mudanças concorrentes; 
 - Notificar o usuário ou administrador;
 
+### Exemplo de Lock Otimista
+
+Imagine que abaixo temos uam tabela de banco de dados:
+
+
+name      | email | versao
+--------- |-------| --------
+Felipe    | f@f   | 1
+Carlos    | c@c   |  2
+
+Repare que a coluna versao seria a nossa marca e ela quem faz o versionamento do registro.
+
 Vantagens:
 
 - Reduz a contenção, já que os bloqueios não são mantidos durante toda a duração da operação.
