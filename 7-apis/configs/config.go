@@ -35,6 +35,7 @@ func LoadConfig(path string) (*conf, error) {
 	if err != nil {
 		panic(err)
 	}
+	// Aqui estamos adicionando o algoritimo usado e o secret que será usado para validar o JWT que será obtido do arquivo .env
 	cfg.TokenAuth = jwtauth.New("HS256", []byte(cfg.JWTSecret), nil)
 	return cfg, err
 }
