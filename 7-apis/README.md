@@ -13,6 +13,53 @@ https://github.com/golang-standards/project-layout
 - test: Aplicativos de teste externos adicionais e dados de teste.
 - api: Guarda as especificações da nossa api (swagger).
 
+## Middleware
+
+
+Um middleware em Go (Golang) é um termo usado para descrever uma função ou um conjunto de funções que são executadas antes ou depois de um manipulador HTTP. Em outras palavras, eles são intermediários que processam as solicitações HTTP antes de chegarem ao manipulador final (ou endpoint), e/ou processam as respostas antes de serem enviadas de volta ao cliente.
+
+As principais características e usos de um middleware em Go são:
+
+- Processamento Intermediário: Middlewares são usados para executar algum tipo de processamento nas solicitações ou respostas. Por exemplo, eles podem ser usados para adicionar cabeçalhos comuns, registrar solicitações, autenticar usuários, manipular erros, etc.
+
+- Cadeia de Manipuladores: Em uma aplicação web, os middlewares são normalmente organizados em uma cadeia. Cada middleware pode decidir se passa a solicitação para o próximo middleware na cadeia ou termina o processamento.
+
+- Modificação de Solicitações e Respostas: Middlewares têm a capacidade de modificar a solicitação e a resposta. Por exemplo, um middleware pode adicionar informações adicionais ao contexto da solicitação, que podem ser usadas por manipuladores subsequentes.
+
+- Reusabilidade: Um middleware pode ser reutilizado em diferentes partes de uma aplicação. Por exemplo, um middleware de logging pode ser usado em todas as rotas para registrar informações sobre as solicitações.
+
+- Sintaxe em Go: Em Go, um middleware é normalmente implementado como uma função que recebe e retorna um http.Handler. Aqui está um exemplo simplificado:
+
+```go
+func MyMiddleware(next http.Handler) http.Handler {
+    return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+        // Código do middleware aqui
+
+        next.ServeHTTP(w, r)
+    })
+}
+```
+
+Este middleware recebe um manipulador next (o próximo na cadeia) e retorna um novo manipulador. Dentro da função, você pode executar o código necessário antes e/ou depois de chamar next.ServeHTTP(w, r).
+
+Em resumo, middlewares em Go são uma ferramenta poderosa para adicionar funcionalidades transversais (como logging, autenticação, e manipulação de erros) de maneira modular e reutilizável em aplicações web.
+
+**OBS: Um middleware em Go é basicamente uma função que recebe e retorna um http.Handler.** 
+
+### Como registro um middleware usando um multiplexer router como o Chi ou Gorila mux ?
+
+```go
+r.Use(MyCustomMiddleware)
+r.Use(LoggerMiddleware)
+r.Use(MyCustomMiddleware)
+http.ListenAndServe(":8080", r)
+```
+
+Eles serão executados na ordem em que são registrados e para compartilharmos valores entre eles, precisamos adicionar esses valores no contexto da request para que ele esteja acessivel a outros 
+middlewares.
+
+
+
 ## JWT
 
 [Documentação](https://jwt.io/)
